@@ -1,0 +1,6 @@
+{
+  "name": "AI Career Buddy – Your Personal Career Assistant",
+  "description": "AI-powered career guidance platform designed for college students: AI Resume Builder, Interview Practice Questions, Answer Improver, Career Guidance, Skill Learning Roadmaps, and Cover Letters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
