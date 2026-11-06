@@ -13,6 +13,7 @@ import {
   Code,
   AlertCircle,
   Lightbulb,
+  Printer,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -416,6 +417,16 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onShowToast }) => 
                         <span>Copy Resume</span>
                       </>
                     )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => window.print()}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors shadow-2xs"
+                    title="Print or Save as PDF"
+                  >
+                    <Printer className="w-3.5 h-3.5" />
+                    <span>Print / PDF</span>
                   </button>
 
                   <button

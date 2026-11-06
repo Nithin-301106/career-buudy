@@ -215,20 +215,46 @@ export const SkillRoadmap: React.FC<SkillRoadmapProps> = ({
       {/* Roadmap Output */}
       {data && (
         <div className="space-y-8">
-          {/* Overview Card */}
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs text-slate-500">
-                <span>Curriculum Outline</span>
-                <span aria-hidden="true">·</span>
-                <span className="font-semibold text-violet-600">{data.estimatedDuration}</span>
+          {/* Overview Card with Progress Tracker */}
+          {(() => {
+            const totalTopics = data.stages.reduce((acc, stg) => acc + (stg.topics?.length || 0), 0);
+            const completedCount = Object.values(completedTopics).filter(Boolean).length;
+            const progressPercent = totalTopics > 0 ? Math.round((completedCount / totalTopics) * 100) : 0;
+
+            return (
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <span>Curriculum Outline</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="font-semibold text-violet-600">{data.estimatedDuration}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mt-1">{data.title}</h3>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
+                      {data.description}
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 min-w-[200px] shrink-0 space-y-1.5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="font-medium text-slate-600">Your Progress</span>
+                      <span className="font-bold text-violet-700 font-mono">{progressPercent}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-violet-600 to-purple-600 rounded-full transition-all duration-300"
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                    <div className="text-[11px] text-slate-500 font-mono">
+                      {completedCount} of {totalTopics} topics checked
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mt-1">{data.title}</h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
-                {data.description}
-              </p>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* 3 Stages Timeline */}
           <div className="space-y-6">
